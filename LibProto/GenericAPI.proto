@@ -1,0 +1,28 @@
+﻿syntax = "proto3"; 
+
+package GenericApiProtos;
+
+import "google/api/annotations.proto";
+
+service GenericApiProto { 
+	rpc PostMethod0 (Message) returns (Reply) {
+		option (google.api.http) = {
+		  post: "/HttpAPI/PostMethod0"
+		  body: "*"
+		};
+	};
+	rpc GetMethod0 (Message) returns (Reply) {
+		option (google.api.http) = {
+		  get: "/HttpAPI/GetMethod0/{Data}"
+		};
+	};
+}
+
+
+message Reply { 
+	string Answer = 1; 
+} 
+
+message Message { 
+	string Data = 1; 
+}

@@ -1,0 +1,22 @@
+﻿@media only screen and (min-height: 601px) {
+    .custom-footer {
+        position: fixed;
+        bottom: 0;
+        padding: 0;
+        right: 0;
+        left: auto;
+        width: 100vw;
+        /*Above all, even MudGrpc elems*/
+        z-index: 9999;
+    }
+}
+
+@media only screen and (max-height: 600px) {
+    .custom-footer {
+        position: absolute;
+        bottom: 0;
+        padding: 0;
+        right: 0;
+        left: 0;
+    }
+}

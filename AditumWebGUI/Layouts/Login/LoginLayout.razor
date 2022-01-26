@@ -1,0 +1,18 @@
+﻿@*Other imports are already derived from root _Imports.razor*@
+
+@inherits LayoutComponentBase
+@layout GlobalLayout
+
+<MudGrid Spacing="0">
+	<MudItem xs="3">
+		<MudPaper Class="d-flex align-center justify-center mud-width-full" Style="min-height: 100vh" Elevation="0">
+			@Body
+		</MudPaper>
+	</MudItem>
+	<MudItem xs="9">
+		<MudPaper Class="d-flex align-center justify-center mud-width-full" Style="min-height: 100vh;" Elevation="0">
+			<!--Put image to display on the right-->
+			<!--<img src="images/Aditum_LoginMain_Logo.png" style="width: 100vw; height: 100vh" />-->
+		</MudPaper>
+	</MudItem>
+</MudGrid>

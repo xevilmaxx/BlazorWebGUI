@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Authentication.proto" />
+    <None Remove="GenericAPI.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.18.0" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.39.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.40.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Grpc.HttpApi" Version="0.1.0-alpha.21317.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="Authentication.proto">
+      <GrpcServices>Both</GrpcServices>
+      <ProtoCompile>true</ProtoCompile>
+    </Protobuf>
+    <Protobuf Include="GenericAPI.proto">
+      <GrpcServices>Both</GrpcServices>
+      <ProtoCompile>true</ProtoCompile>
+    </Protobuf>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="HTTPSamples\greet.proto" GrpcServices="Both" ProtoCompile="true" />
+    <None Update="HTTPSamples\Test0.proto" GrpcServices="Both" ProtoCompile="true" />
+  </ItemGroup>
+
+</Project>

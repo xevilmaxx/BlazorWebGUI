@@ -1,0 +1,83 @@
+﻿@*https://stackoverflow.com/questions/63510518/how-to-access-parent-component-type-in-child-component*@
+@*@Anyway*@
+
+@*@if (IsRoleOk)
+{
+	@Authorized
+}
+else
+{
+	//@NotAuthorized
+}*@
+
+<CascadingValue Value="this">
+	@ChildContent
+</CascadingValue>
+
+@code {
+
+	private static readonly NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
+
+	[Parameter]
+	public string Roles { get; set; }
+
+	[Parameter]
+	public RenderFragment ChildContent { get; set; }
+
+	@*[Parameter]
+	public RenderFragment NotAuthorized { get; set; }
+
+	[Parameter]
+	public RenderFragment Anyway { get; set; }*@
+
+	private List<RenderFragment> AllFragments { get; set; } = new List<RenderFragment>();
+
+	[CascadingParameter]
+	private Task<AuthenticationState> AuthenticationStateTask { get; set; }
+
+	public bool IsRoleOk { get; set; }
+	public List<string> DecodedRoles { get; set; }
+
+	protected override async Task OnInitializedAsync()
+	{
+				
+		var claimsPrincipal = (await AuthenticationStateTask).User;
+
+		if(claimsPrincipal.Identity.IsAuthenticated == false)
+		{
+			log.Warn($"User: {claimsPrincipal.Identity.Name} is not authenticated");
+			return;
+		}
+		else
+		{
+			log.Debug($"User: {claimsPrincipal.Identity.Name} will be checked for roles");
+		}
+
+		if (string.IsNullOrEmpty(Roles))
+		{
+			IsRoleOk = true;
+			log.Debug("No roles passed, will allow to anyone autentificated");
+			return;
+		}
+
+		DecodedRoles = Roles.Split(",")
+						.Select(x => x.Trim())
+						.ToList();
+
+		var isRoleOk = claimsPrincipal.Identities.Where(x => DecodedRoles.Any(y => y.Equals(x.RoleClaimType))).FirstOrDefault();
+
+		if(isRoleOk != null)
+		{
+			log.Debug($"Found role matching");
+			IsRoleOk = true;
+		}
+		else
+		{
+			log.Debug($"But has no appropriate Role");
+		}
+
+		//StateHasChanged();
+
+	}
+
+}

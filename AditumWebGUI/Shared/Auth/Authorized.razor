@@ -1,0 +1,65 @@
+﻿@*https://stackoverflow.com/questions/63510518/how-to-access-parent-component-type-in-child-component*@
+@if (IsCanRender == true)
+{
+	@ChildContent
+}
+
+@code {
+
+	private static readonly NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
+
+	[CascadingParameter]
+	public CustomAuthorization MyParentComponent { get; set; }
+
+	[Parameter]
+	public RenderFragment ChildContent { get; set; }
+
+	[Parameter]
+	public string SubRoles { get; set; }
+
+	private bool IsCanRender { get; set; }
+
+	protected override async Task OnInitializedAsync()
+	{
+		if(MyParentComponent.IsRoleOk == false)
+		{
+			log.Trace("Parent role is KO");
+			return;
+		}
+
+		if(
+			string.IsNullOrEmpty(SubRoles) == false
+			&&
+			MyParentComponent.DecodedRoles != null
+			&&
+			MyParentComponent.DecodedRoles.Count > 0
+			)
+		{
+
+			var subRoles = SubRoles.Split(",")
+							.Select(x => x.Trim())
+							.ToList();
+
+			var isSubRoleOk = subRoles.Any(x => MyParentComponent.DecodedRoles.Any(y => y == x));
+
+			if(isSubRoleOk == true)
+			{
+				log.Trace("Sub Role is contained in parent");
+				IsCanRender = true;
+			}
+			else
+			{
+				log.Trace("Sub Role is NOT contained in parent");
+				IsCanRender = false;
+			}
+
+		}
+		else
+		{
+			log.Trace("Can render as no SubRoles indicated");
+			IsCanRender = true;
+		}
+
+	}
+
+}

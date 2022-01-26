@@ -1,0 +1,20 @@
+﻿<MudCard>
+    <MudCardContent>
+        <h1>Sorry, there's nothing at this address.</h1>
+    </MudCardContent>
+    <MudCardActions>
+        <MudButton Variant="Variant.Text" Color="Color.Primary" StartIcon="@Icons.Filled.Home" OnClick="OnReurnToHomeButtonClicked">Home</MudButton>
+    </MudCardActions>
+</MudCard>
+
+@code {
+
+    [Inject]
+    public NavigationManager Navigation { get; set; }
+
+    void OnReurnToHomeButtonClicked()
+    {
+        Navigation.NavigateTo("/");
+    }
+
+}

@@ -1,0 +1,64 @@
+﻿@page "/login"
+@using AditumWebGUI.CustomAuth
+@using AditumWebGUI.DTO
+@inherits Controllers.Login.LoginController
+
+@inject ISnackbar Snackbar
+
+<div style="min-width: 90%; max-width: 90%">
+
+
+	<MudGrid>
+
+		<MudItem xs="12">
+			<img src="images/Aditum_Mini_Logo.png" style="width: 40%" />
+		</MudItem>
+
+		<!--Spacer-->
+		<MudItem xs="12" Style="height: 5vh" />
+
+		<MudItem xs="12">
+			<EditForm Model="@model" OnValidSubmit="OnValidatedLoginPress">
+				<DataAnnotationsValidator />
+				<MudCard>
+					<MudCardContent>
+						<MudTextField Label="Username" HelperText="Max. 8 characters"
+									  @bind-Value="model.Username" For="@(() => model.Username)" />
+						<MudTextField Label="Password" HelperText="Choose a strong password" Class="mt-3"
+									  @bind-Value="model.Password" For="@(() => model.Password)" InputType="InputType.Password" />
+					</MudCardContent>
+					<MudCardActions>
+						<MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" FullWidth="true" StartIcon="@Icons.Material.Filled.Login" Class="ml-auto indigo accent-2 shades-text text-white">@Lang.LogIn</MudButton>
+					</MudCardActions>
+				</MudCard>
+
+			</EditForm>
+		</MudItem>
+
+		<MudItem xs="12">
+			<MudPaper Class="d-flex align-center justify-center mud-width-full" Elevation="0">
+				<MudText Typo="Typo.h6">@Lang.FollowUs</MudText>
+			</MudPaper>
+		</MudItem>
+
+		<MudItem xs="12">
+			<MudPaper Class="d-flex align-center justify-center mud-width-full" Elevation="0">
+				<MudIcon Icon="@Icons.Custom.Brands.Facebook" Class="mr-5"></MudIcon>
+				<MudIcon Icon="@Icons.Custom.Brands.Google" Class="mr-5"></MudIcon>
+				<MudIcon Icon="@Icons.Custom.Brands.Twitter" Class="mr-5"></MudIcon>
+				<MudIcon Icon="@Icons.Custom.Brands.GitHub" Class="mr-5"></MudIcon>
+			</MudPaper>
+		</MudItem>
+
+	</MudGrid>
+
+
+
+
+</div>
+
+@for (int i = 0; i < _receivedMessages.Count; i++)
+{
+	Snackbar.Add(_receivedMessages[i], Severity.Warning, config => { config.ShowCloseIcon = false; });
+	_receivedMessages.Remove(_receivedMessages[i]);
+}

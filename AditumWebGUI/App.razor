@@ -1,0 +1,25 @@
+<CascadingAuthenticationState>
+    <Router AppAssembly="@typeof(Program).Assembly" PreferExactMatches="@true">
+        
+        <Found Context="routeData">
+            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(GlobalLayout)">
+                
+                <NotAuthorized>
+                    @Helpers.DynamicRender.RenderRazorComponent(typeof(Shared.Navigation.NotAuthorizedPage))
+                </NotAuthorized>
+
+                <Authorizing>
+                    @Helpers.DynamicRender.RenderRazorComponent(typeof(Shared.Navigation.AuthorizingPage))
+                </Authorizing>
+
+            </AuthorizeRouteView>
+        </Found>
+
+        <NotFound>
+            <LayoutView Layout="@typeof(GlobalLayout)">
+                @Helpers.DynamicRender.RenderRazorComponent(typeof(Shared.Navigation.NotFoundPage))
+            </LayoutView>
+        </NotFound>
+
+    </Router>
+</CascadingAuthenticationState>

@@ -1,0 +1,14 @@
+﻿@*https://stackoverflow.com/questions/63510518/how-to-access-parent-component-type-in-child-component*@
+@ChildContent
+
+@code {
+
+	private static readonly NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
+
+	[CascadingParameter]
+	public CustomAuthorization MyParentComponent { get; set; }
+
+	[Parameter]
+	public RenderFragment ChildContent { get; set; }
+
+}

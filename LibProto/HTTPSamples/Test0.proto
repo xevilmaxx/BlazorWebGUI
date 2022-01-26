@@ -1,0 +1,28 @@
+﻿syntax = "proto3"; 
+
+package Test0Protos;
+
+import "google/api/annotations.proto";
+
+service Test0 { 
+	rpc Hello (Message) returns (Reply) {
+		option (google.api.http) = {
+		  post: "/v1/echo"
+		  body: "*"
+		};
+	};
+	rpc Hello1 (Message) returns (Reply) {
+		option (google.api.http) = {
+		  get: "/v1/echo1/{Data}"
+		};
+	};
+}
+
+
+message Reply { 
+	string Answer = 1; 
+} 
+
+message Message { 
+	string Data = 1; 
+}
