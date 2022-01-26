@@ -1,8 +1,14 @@
 # BlazorWebGUI
 
 ## Navigation paths
-/ -> main section of website
-/login -> login page (in order to be able to navigate in some protected main page sectors)
+
+**/** -> main section of website (some parts are protected from unlogged users, please go to /login (manually type in browser navigation) and log in with correct credentials)
+
+**/login** -> login page (in order to be able to navigate in some protected main page sectors)
+
+**/subcat00** -> (had crafted sub categories)
+
+**/subcat10** -> (dynamic sub categories)
 
 ---
 
