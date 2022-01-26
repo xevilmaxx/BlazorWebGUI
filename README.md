@@ -47,3 +47,47 @@ Backend to Frontend (without additional protection):
 Server to Subscribers (without additional protection):
 * Push notifications through SignalR (public dedicated channel)
 * Instead of WebSocket, SignalR was preferred for its simplicity, which anyway can use WebSocket (eventually still to review)
+
+---
+
+## Blazor layouts
+
+https://blazor-university.com/layouts/using-layouts/
+
+https://blazor-university.com/layouts/nested-layouts/
+
+https://blazor-tutorial.net/layout
+
+
+
+## Menu
+
+MudNavLink
+
+https://mudblazor.com/components/navmenu#icons
+
+
+
+## GRPC Web API
+
+https://blog.stevensanderson.com/2020/01/15/2020-01-15-grpc-web-in-blazor-webassembly/
+
+https://azure.github.io/AppService/2021/03/15/How-to-use-gRPC-Web-with-Blazor-WebAssembly-on-App-Service.html
+
+https://docs.microsoft.com/it-it/aspnet/core/grpc/browser?view=aspnetcore-5.0
+
+
+
+## GRPC AS REST API:
+
+https://github.com/aspnet/AspLabs/tree/main/src/GrpcHttpApi
+
+https://cloud.google.com/service-infrastructure/docs/service-management/reference/rpc/google.api#google.api.HttpRule
+
+https://docs.microsoft.com/it-it/aspnet/core/grpc/httpapi?view=aspnetcore-5.0
+
+
+
+
+
+https://cloud.google.com/endpoints/docs/grpc/transcoding
